@@ -3,6 +3,8 @@ package sap.ass01.sol1.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import sap.ass01.sol1.persistance.UserRepository;
 
 import sap.ass01.sol1.persistance.EBikeRepository;
@@ -13,6 +15,7 @@ import sap.ass01.sol1.service.models.UserImpl.Role;
 import sap.ass01.sol1.service.utils.Position;
 import sap.ass01.sol1.service.models.*;
 
+@Service
 public class EBikeServiceImpl implements EBikeService {
 
     private final UserRepository userRepository;
@@ -27,6 +30,7 @@ public class EBikeServiceImpl implements EBikeService {
     @Override
     public void addUser(String userId) {
         User user = new UserImpl(userId, 0, Role.USER);
+        System.out.println("user added in repository");
         userRepository.save(user);
     }
 

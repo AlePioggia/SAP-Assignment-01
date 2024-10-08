@@ -21,32 +21,32 @@ public class EBikeController {
         this.eBikeService = eBikeService;
     }
 
-    @PostMapping("/admin/{adminId}/addUser")
+    @PostMapping("addUser")
     public ResponseEntity<String> addUser(@RequestParam String userId) {
         eBikeService.addUser(userId);
         return ResponseEntity.ok("User added");
     }
 
-    @PostMapping("/admin/{adminId}/addEBike")
+    @PostMapping("addEBike")
     public ResponseEntity<String> addEBike(@RequestParam String eBikeId, @RequestParam String userId,
             @RequestParam int x, @RequestParam int y) {
         eBikeService.addEBike(eBikeId, userId, x, y);
         return ResponseEntity.ok("EBike added");
     }
 
-    @PostMapping("/admin/{adminId}/removeEBike")
+    @PostMapping("removeEBike")
     public ResponseEntity<String> removeEBike(@RequestParam String eBikeId) {
         eBikeService.removeEBike(eBikeId);
         return ResponseEntity.ok("EBike removed");
     }
 
-    @PostMapping("/admin/{adminId}/removeUser")
+    @PostMapping("removeUser")
     public ResponseEntity<String> removeUser(@RequestParam String userId) {
         eBikeService.removeUser(userId);
         return ResponseEntity.ok("User removed");
     }
 
-    @PostMapping("/user/{userId}/startRide")
+    @PostMapping("startRide")
     public ResponseEntity<String> startRide(@RequestParam String userId, @RequestParam String bikeId) {
         eBikeService.startRide(userId, bikeId);
         return ResponseEntity.ok("Ride started");

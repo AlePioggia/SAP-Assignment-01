@@ -3,8 +3,12 @@ package sap.ass01.sol1.persistance;
 import sap.ass01.sol1.service.models.EBike;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 
+@Repository
 public class EBikeRepositoryImpl implements EBikeRepository {
 
     private final Map<String, EBike> eBikes = new HashMap<>();

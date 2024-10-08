@@ -2,9 +2,12 @@ package sap.ass01.sol1.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import sap.ass01.sol1.service.models.EBike;
 import sap.ass01.sol1.service.models.User;
 
+@Service
 public interface EBikeService {
 
     void addUser(String userId);

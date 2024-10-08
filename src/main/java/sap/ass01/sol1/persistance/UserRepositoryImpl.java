@@ -3,8 +3,12 @@ package sap.ass01.sol1.persistance;
 import sap.ass01.sol1.service.models.User;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private Map<String, User> users = new HashMap<>();
