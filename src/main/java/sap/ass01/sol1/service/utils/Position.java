@@ -24,4 +24,8 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
+    public Position sum(VelocityVector vec) {
+        return new Position(x + (int) vec.getX(), y + (int) vec.getY());
+    }
 }

@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sap.ass01.sol1.persistance.UserRepository;
-
+import sap.ass01.sol1.service.simulation.*;
 import sap.ass01.sol1.persistance.EBikeRepository;
-import sap.ass01.sol1.service.models.EBikeImpl;
-import sap.ass01.sol1.service.models.User;
-import sap.ass01.sol1.service.models.UserImpl;
 import sap.ass01.sol1.service.models.UserImpl.Role;
 import sap.ass01.sol1.service.utils.Position;
 import sap.ass01.sol1.service.models.*;
@@ -40,7 +37,7 @@ public class EBikeServiceImpl implements EBikeService {
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
-        EBike eBike = new EBikeImpl(eBikeId, new Position(x, y));
+        EBike eBike = new EBikeImpl(eBikeId, new Position(x, y), 1, null);
         eBikeRepository.save(eBike);
     }
 
@@ -56,8 +53,24 @@ public class EBikeServiceImpl implements EBikeService {
 
     @Override
     public void startRide(String userId, String bikeId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'startRide'");
+        User user = userRepository.findById(userId);
+        EBike eBike = eBikeRepository.findById(bikeId);
+
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        if (eBike == null || !eBike.isAvailable()) {
+            throw new IllegalArgumentException("EBike not found");
+        }
+
+        eBike.markAsUnavailable();
+        eBikeRepository.save(eBike);
+
+        Ride ride = new Ride("0", user, eBike);
+        RideSimulation rideSimulation = new RideSimulation(ride, user, this);
+
+        rideSimulation.start();
     }
 
     @Override
@@ -70,4 +83,19 @@ public class EBikeServiceImpl implements EBikeService {
         return eBikeRepository.findAll();
     }
 
+    @Override
+    public void updateUser(User user) {
+        if (user == null || userRepository.findById(user.getUserId()) == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateEBike(EBike eBike) {
+        if (eBike == null || eBikeRepository.findById(eBike.getEBikeId()) == null) {
+            throw new IllegalArgumentException("EBike not found");
+        }
+        eBikeRepository.save(eBike);
+    }
 }

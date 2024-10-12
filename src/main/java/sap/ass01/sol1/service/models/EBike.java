@@ -1,6 +1,7 @@
 package sap.ass01.sol1.service.models;
 
 import sap.ass01.sol1.service.utils.Position;
+import sap.ass01.sol1.service.utils.VelocityVector;
 
 public interface EBike {
     public String getEBikeId();
@@ -13,7 +14,15 @@ public interface EBike {
 
     public void markAsUnavailable();
 
-    public Position getPosition();
+    Position getLocation();
 
-    public void setPosition(Position position);
+    void updateLocation(Position newPosition);
+
+    double getSpeed();
+
+    void updateSpeed(double speed);
+
+    VelocityVector getDirection();
+
+    void updateDirection(VelocityVector direction);
 }

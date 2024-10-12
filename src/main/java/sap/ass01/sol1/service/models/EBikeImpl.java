@@ -1,17 +1,22 @@
 package sap.ass01.sol1.service.models;
 
 import sap.ass01.sol1.service.utils.Position;
+import sap.ass01.sol1.service.utils.VelocityVector;
 
 public class EBikeImpl implements EBike {
 
     private String eBikeId;
     private boolean available;
     private Position position;
+    private double speed;
+    private VelocityVector direction;
 
-    public EBikeImpl(String eBikeId, Position position) {
+    public EBikeImpl(String eBikeId, Position position, double speed, VelocityVector direction) {
         this.eBikeId = eBikeId;
         this.position = position;
         this.available = true;
+        this.speed = speed;
+        this.direction = direction;
     }
 
     @Override
@@ -40,13 +45,33 @@ public class EBikeImpl implements EBike {
     }
 
     @Override
-    public Position getPosition() {
+    public Position getLocation() {
         return position;
     }
 
     @Override
-    public void setPosition(Position position) {
-        this.position = position;
+    public void updateLocation(Position newPosition) {
+        this.position = newPosition;
+    }
+
+    @Override
+    public double getSpeed() {
+        return this.speed;
+    }
+
+    @Override
+    public void updateSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    @Override
+    public VelocityVector getDirection() {
+        return direction;
+    }
+
+    @Override
+    public void updateDirection(VelocityVector direction) {
+        this.direction = direction;
     }
 
 }

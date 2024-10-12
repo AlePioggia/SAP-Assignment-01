@@ -14,6 +14,10 @@ public interface EBikeService {
 
     void addEBike(String eBikeId, String userId, int x, int y);
 
+    void updateUser(User user);
+
+    void updateEBike(EBike eBike);
+
     void removeEBike(String eBikeId);
 
     void removeUser(String userId);
