@@ -1,19 +1,19 @@
 package sap.ass01.sol1.service.simulation;
 
-import sap.ass01.sol1.service.EBikeService;
-import sap.ass01.sol1.service.UserService;
 import sap.ass01.sol1.service.models.EBike;
 import sap.ass01.sol1.service.models.User;
+import sap.ass01.sol1.service.plugins.EBikeServicePlugin;
+import sap.ass01.sol1.service.plugins.UserServicePlugin;
 
 public class RideSimulation extends Thread {
 
     private Ride ride;
     private User user;
     private volatile boolean stopped;
-    private EBikeService bikeService;
-    private UserService userService;
+    private EBikeServicePlugin bikeService;
+    private UserServicePlugin userService;
 
-    public RideSimulation(Ride ride, User user, EBikeService bikeService, UserService userService) {
+    public RideSimulation(Ride ride, User user, EBikeServicePlugin bikeService, UserServicePlugin userService) {
         this.ride = ride;
         this.user = user;
         this.bikeService = bikeService;

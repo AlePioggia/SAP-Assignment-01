@@ -9,7 +9,7 @@ import sap.ass01.sol1.service.models.User;
 import sap.ass01.sol1.service.models.UserImpl;
 import sap.ass01.sol1.service.models.UserImpl.Role;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserServicePlugin {
     private final UserRepository userRepository;
 
     @Autowired
@@ -45,5 +45,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void initialize() {
+        System.out.println("User service initialized");
+    }
+
+    @Override
+    public String getName() {
+        return "UserService";
     }
 }

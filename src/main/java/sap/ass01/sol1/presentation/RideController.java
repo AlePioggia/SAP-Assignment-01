@@ -5,17 +5,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import sap.ass01.sol1.kernel.Kernel;
-import sap.ass01.sol1.service.RideService;
+import sap.ass01.sol1.service.RideServicePlugin;
 
 @RestController
 @RequestMapping("/api/rides")
 public class RideController {
 
-    private final RideService rideService;
+    private final RideServicePlugin rideService;
 
     @Autowired
     public RideController(Kernel kernel) {
-        this.rideService = kernel.getService(RideService.class);
+        this.rideService = kernel.getService(RideServicePlugin.class);
     }
 
     @PostMapping("/start")

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sap.ass01.sol1.kernel.Kernel;
-import sap.ass01.sol1.service.EBikeService;
+import sap.ass01.sol1.service.plugins.EBikeServicePlugin;
 
 @RestController
 @RequestMapping("/api")
@@ -25,28 +25,21 @@ public class EBikeController {
     @PostMapping("add")
     public ResponseEntity<String> addEBike(@RequestParam String eBikeId, @RequestParam String userId,
             @RequestParam int x, @RequestParam int y) {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
+        EBikeServicePlugin eBikeService = kernel.getService(EBikeServicePlugin.class);
         eBikeService.addEBike(eBikeId, userId, x, y);
         return ResponseEntity.ok("EBike added");
     }
 
     @PostMapping("remove")
     public ResponseEntity<String> removeEBike(@RequestParam String eBikeId) {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
+        EBikeServicePlugin eBikeService = kernel.getService(EBikeServicePlugin.class);
         eBikeService.removeEBike(eBikeId);
         return ResponseEntity.ok("EBike removed");
     }
 
-    @PostMapping("startRide")
-    public ResponseEntity<String> startRide(@RequestParam String userId, @RequestParam String bikeId) {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
-        eBikeService.startRide(userId, bikeId);
-        return ResponseEntity.ok("Ride started");
-    }
-
     @GetMapping("")
     public ResponseEntity<String> getBikes() {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
+        EBikeServicePlugin eBikeService = kernel.getService(EBikeServicePlugin.class);
         return ResponseEntity.ok(eBikeService.getBikes().toString());
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sap.ass01.sol1.kernel.Kernel;
-import sap.ass01.sol1.service.UserService;
+import sap.ass01.sol1.service.UserServicePlugin;
 
 @RestController
 @RequestMapping("/api/users")
@@ -23,21 +23,21 @@ public class UserController {
 
     @PostMapping("add")
     public ResponseEntity<String> addUser(@RequestParam String userId) {
-        UserService userService = kernel.getService(UserService.class);
+        UserServicePlugin userService = kernel.getService(UserServicePlugin.class);
         userService.addUser(userId);
         return ResponseEntity.ok("User added");
     }
 
     @PostMapping("remove")
     public ResponseEntity<String> removeUser(@RequestParam String userId) {
-        UserService userService = kernel.getService(UserService.class);
+        UserServicePlugin userService = kernel.getService(UserServicePlugin.class);
         userService.removeUser(userId);
         return ResponseEntity.ok("User removed");
     }
 
     @GetMapping("")
     public ResponseEntity<String> getUsers() {
-        UserService userService = kernel.getService(UserService.class);
+        UserServicePlugin userService = kernel.getService(UserServicePlugin.class);
         return ResponseEntity.ok(userService.getUsers().toString());
     }
 }

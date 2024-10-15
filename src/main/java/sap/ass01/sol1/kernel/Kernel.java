@@ -9,12 +9,8 @@ public class Kernel {
         this.pluginManager = new PluginManager();
     }
 
-    public ServiceRegistry getServiceRegistry() {
-        return serviceRegistry;
-    }
-
-    public PluginManager getPluginManager() {
-        return pluginManager;
+    public void loadPlugins(String pluginDirectory) {
+        pluginManager.loadPluginsFromDirectory(pluginDirectory);
     }
 
     public <T> T getService(Class<T> serviceClass) {

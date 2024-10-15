@@ -13,15 +13,16 @@ import sap.ass01.sol1.service.simulation.RideSimulation;
 
 import java.util.UUID;
 
-public class RideServiceImpl implements RideService {
+public class RideServiceImpl implements RideServicePlugin {
 
     private final RideRepository rideRepository;
-    private final UserService userService;
+    private final UserServicePlugin userService;
 
-    private final EBikeService eBikeService;
+    private final EBikeServicePlugin eBikeService;
 
     @Autowired
-    public RideServiceImpl(RideRepository rideRepository, UserService userService, EBikeService eBikeService) {
+    public RideServiceImpl(RideRepository rideRepository, UserServicePlugin userService,
+            EBikeServicePlugin eBikeService) {
         this.rideRepository = rideRepository;
         this.userService = userService;
         this.eBikeService = eBikeService;
@@ -72,6 +73,15 @@ public class RideServiceImpl implements RideService {
                 .stream()
                 .filter(ride -> ride.getEndTime() == null)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void initialize() {
+    }
+
+    @Override
+    public String getName() {
+        return "RideService";
     }
 
 }

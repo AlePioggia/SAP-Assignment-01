@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sap.ass01.sol1.persistance.UserRepository;
-import sap.ass01.sol1.service.simulation.*;
 import sap.ass01.sol1.persistance.EBikeRepository;
 import sap.ass01.sol1.service.utils.Position;
 import sap.ass01.sol1.service.models.*;
+import sap.ass01.sol1.service.plugins.EBikeServicePlugin;
+import sap.ass01.sol1.service.plugins.UserServicePlugin;
 
 @Service
-public class EBikeServiceImpl implements EBikeService {
+public class EBikeServiceImpl implements EBikeServicePlugin {
 
     private final EBikeRepository eBikeRepository;
-    private final UserService userService;
+    private final UserServicePlugin userService;
 
     @Autowired
-    public EBikeServiceImpl(UserService userService, EBikeRepository eBikeRepository) {
+    public EBikeServiceImpl(UserServicePlugin userService, EBikeRepository eBikeRepository) {
         this.userService = userService;
         this.eBikeRepository = eBikeRepository;
     }
@@ -44,28 +44,6 @@ public class EBikeServiceImpl implements EBikeService {
     }
 
     @Override
-    public void startRide(String userId, String bikeId) {
-        User user = userService.getUser(userId);
-        EBike eBike = eBikeRepository.findById(bikeId);
-
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
-        }
-
-        if (eBike == null || !eBike.isAvailable()) {
-            throw new IllegalArgumentException("EBike not found");
-        }
-
-        eBike.markAsUnavailable();
-        eBikeRepository.save(eBike);
-
-        Ride ride = new Ride("0", user, eBike);
-        // RideSimulation rideSimulation = new RideSimulation(ride, user, this);
-
-        // rideSimulation.start();
-    }
-
-    @Override
     public List<EBike> getBikes() {
         return eBikeRepository.findAll();
     }
@@ -76,5 +54,14 @@ public class EBikeServiceImpl implements EBikeService {
             throw new IllegalArgumentException("EBike not found");
         }
         eBikeRepository.save(eBike);
+    }
+
+    @Override
+    public void initialize() {
+    }
+
+    @Override
+    public String getName() {
+        return "EBikeService";
     }
 }

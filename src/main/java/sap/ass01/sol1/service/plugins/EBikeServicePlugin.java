@@ -1,14 +1,14 @@
-package sap.ass01.sol1.service;
+package sap.ass01.sol1.service.plugins;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import sap.ass01.sol1.kernel.Plugin;
 import sap.ass01.sol1.service.models.EBike;
-import sap.ass01.sol1.service.models.User;
 
 @Service
-public interface EBikeService {
+public interface EBikeServicePlugin extends Plugin {
 
     void addEBike(String eBikeId, String userId, int x, int y);
 
@@ -17,8 +17,6 @@ public interface EBikeService {
     void updateEBike(EBike eBike);
 
     void removeEBike(String eBikeId);
-
-    void startRide(String userId, String bikeId);
 
     List<EBike> getBikes();
 }
