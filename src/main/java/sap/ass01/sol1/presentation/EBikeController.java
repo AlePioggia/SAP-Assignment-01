@@ -22,14 +22,7 @@ public class EBikeController {
         this.kernel = kernel;
     }
 
-    @PostMapping("addUser")
-    public ResponseEntity<String> addUser(@RequestParam String userId) {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
-        eBikeService.addUser(userId);
-        return ResponseEntity.ok("User added");
-    }
-
-    @PostMapping("addEBike")
+    @PostMapping("add")
     public ResponseEntity<String> addEBike(@RequestParam String eBikeId, @RequestParam String userId,
             @RequestParam int x, @RequestParam int y) {
         EBikeService eBikeService = kernel.getService(EBikeService.class);
@@ -37,18 +30,11 @@ public class EBikeController {
         return ResponseEntity.ok("EBike added");
     }
 
-    @PostMapping("removeEBike")
+    @PostMapping("remove")
     public ResponseEntity<String> removeEBike(@RequestParam String eBikeId) {
         EBikeService eBikeService = kernel.getService(EBikeService.class);
         eBikeService.removeEBike(eBikeId);
         return ResponseEntity.ok("EBike removed");
-    }
-
-    @PostMapping("removeUser")
-    public ResponseEntity<String> removeUser(@RequestParam String userId) {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
-        eBikeService.removeUser(userId);
-        return ResponseEntity.ok("User removed");
     }
 
     @PostMapping("startRide")
@@ -58,13 +44,7 @@ public class EBikeController {
         return ResponseEntity.ok("Ride started");
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<String> getUsers() {
-        EBikeService eBikeService = kernel.getService(EBikeService.class);
-        return ResponseEntity.ok(eBikeService.getUsers().toString());
-    }
-
-    @GetMapping("/bikes")
+    @GetMapping("")
     public ResponseEntity<String> getBikes() {
         EBikeService eBikeService = kernel.getService(EBikeService.class);
         return ResponseEntity.ok(eBikeService.getBikes().toString());

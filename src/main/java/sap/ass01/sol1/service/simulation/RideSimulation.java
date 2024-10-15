@@ -1,6 +1,7 @@
 package sap.ass01.sol1.service.simulation;
 
 import sap.ass01.sol1.service.EBikeService;
+import sap.ass01.sol1.service.UserService;
 import sap.ass01.sol1.service.models.EBike;
 import sap.ass01.sol1.service.models.User;
 
@@ -10,11 +11,13 @@ public class RideSimulation extends Thread {
     private User user;
     private volatile boolean stopped;
     private EBikeService bikeService;
+    private UserService userService;
 
-    public RideSimulation(Ride ride, User user, EBikeService bikeService) {
+    public RideSimulation(Ride ride, User user, EBikeService bikeService, UserService userService) {
         this.ride = ride;
         this.user = user;
         this.bikeService = bikeService;
+        this.userService = userService;
         stopped = false;
     }
 
@@ -61,7 +64,7 @@ public class RideSimulation extends Thread {
     private void saveStatePeriodically() {
         var ebike = ride.getEBike();
         bikeService.updateEBike(ebike);
-        bikeService.updateUser(user);
+        userService.updateUser(user);
     }
 
     public void stopSimulation() {

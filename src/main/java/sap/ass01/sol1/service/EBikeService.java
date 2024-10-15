@@ -10,21 +10,15 @@ import sap.ass01.sol1.service.models.User;
 @Service
 public interface EBikeService {
 
-    void addUser(String userId);
-
     void addEBike(String eBikeId, String userId, int x, int y);
 
-    void updateUser(User user);
+    EBike getEBike(String eBikeId);
 
     void updateEBike(EBike eBike);
 
     void removeEBike(String eBikeId);
 
-    void removeUser(String userId);
-
     void startRide(String userId, String bikeId);
-
-    List<User> getUsers();
 
     List<EBike> getBikes();
 }

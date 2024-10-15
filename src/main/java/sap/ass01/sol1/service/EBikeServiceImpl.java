@@ -8,32 +8,24 @@ import org.springframework.stereotype.Service;
 import sap.ass01.sol1.persistance.UserRepository;
 import sap.ass01.sol1.service.simulation.*;
 import sap.ass01.sol1.persistance.EBikeRepository;
-import sap.ass01.sol1.service.models.UserImpl.Role;
 import sap.ass01.sol1.service.utils.Position;
 import sap.ass01.sol1.service.models.*;
 
 @Service
 public class EBikeServiceImpl implements EBikeService {
 
-    private final UserRepository userRepository;
     private final EBikeRepository eBikeRepository;
+    private final UserService userService;
 
     @Autowired
-    public EBikeServiceImpl(UserRepository userRepository, EBikeRepository eBikeRepository) {
-        this.userRepository = userRepository;
+    public EBikeServiceImpl(UserService userService, EBikeRepository eBikeRepository) {
+        this.userService = userService;
         this.eBikeRepository = eBikeRepository;
     }
 
     @Override
-    public void addUser(String userId) {
-        User user = new UserImpl(userId, 0, Role.USER);
-        System.out.println("user added in repository");
-        userRepository.save(user);
-    }
-
-    @Override
     public void addEBike(String eBikeId, String userId, int x, int y) {
-        User user = userRepository.findById(userId);
+        User user = userService.getUser(userId);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
@@ -42,18 +34,18 @@ public class EBikeServiceImpl implements EBikeService {
     }
 
     @Override
+    public EBike getEBike(String eBikeId) {
+        return eBikeRepository.findById(eBikeId);
+    }
+
+    @Override
     public void removeEBike(String eBikeId) {
         eBikeRepository.delete(eBikeId);
     }
 
     @Override
-    public void removeUser(String userId) {
-        userRepository.delete(userId);
-    }
-
-    @Override
     public void startRide(String userId, String bikeId) {
-        User user = userRepository.findById(userId);
+        User user = userService.getUser(userId);
         EBike eBike = eBikeRepository.findById(bikeId);
 
         if (user == null) {
@@ -68,27 +60,14 @@ public class EBikeServiceImpl implements EBikeService {
         eBikeRepository.save(eBike);
 
         Ride ride = new Ride("0", user, eBike);
-        RideSimulation rideSimulation = new RideSimulation(ride, user, this);
+        // RideSimulation rideSimulation = new RideSimulation(ride, user, this);
 
-        rideSimulation.start();
-    }
-
-    @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+        // rideSimulation.start();
     }
 
     @Override
     public List<EBike> getBikes() {
         return eBikeRepository.findAll();
-    }
-
-    @Override
-    public void updateUser(User user) {
-        if (user == null || userRepository.findById(user.getUserId()) == null) {
-            throw new IllegalArgumentException("User not found");
-        }
-        userRepository.save(user);
     }
 
     @Override
