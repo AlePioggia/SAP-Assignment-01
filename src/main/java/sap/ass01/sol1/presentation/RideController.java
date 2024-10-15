@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import sap.ass01.sol1.kernel.Kernel;
-import sap.ass01.sol1.service.RideServicePlugin;
+import sap.ass01.sol1.service.plugins.RideServicePlugin;
 
 @RestController
 @RequestMapping("/api/rides")

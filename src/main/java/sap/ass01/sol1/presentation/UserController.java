@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sap.ass01.sol1.kernel.Kernel;
-import sap.ass01.sol1.service.UserServicePlugin;
+import sap.ass01.sol1.service.plugins.UserServicePlugin;
 
 @RestController
 @RequestMapping("/api/users")

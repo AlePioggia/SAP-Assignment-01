@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import sap.ass01.sol1.persistance.RideRepository;
 import sap.ass01.sol1.service.models.EBike;
 import sap.ass01.sol1.service.models.User;
+import sap.ass01.sol1.service.plugins.EBikeServicePlugin;
+import sap.ass01.sol1.service.plugins.RideServicePlugin;
+import sap.ass01.sol1.service.plugins.UserServicePlugin;
 import sap.ass01.sol1.service.simulation.Ride;
 import sap.ass01.sol1.service.simulation.RideSimulation;
 

@@ -8,6 +8,7 @@ import sap.ass01.sol1.persistance.UserRepository;
 import sap.ass01.sol1.service.models.User;
 import sap.ass01.sol1.service.models.UserImpl;
 import sap.ass01.sol1.service.models.UserImpl.Role;
+import sap.ass01.sol1.service.plugins.UserServicePlugin;
 
 public class UserServiceImpl implements UserServicePlugin {
     private final UserRepository userRepository;
