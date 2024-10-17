@@ -2,6 +2,8 @@ package sap.ass01.sol2.domain.models;
 
 import java.time.LocalDateTime;
 
+import sap.ass01.sol2.usecases.simulation.RideSimulation;
+
 public class Ride {
 
     private String rideId;
@@ -10,6 +12,7 @@ public class Ride {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private double totalDistance;
+    private RideSimulation rideSimulation;
 
     public Ride(String rideId, User user, EBike eBike) {
         this.rideId = rideId;
@@ -17,6 +20,15 @@ public class Ride {
         this.eBike = eBike;
         this.startTime = LocalDateTime.now();
         this.totalDistance = 0.0;
+        this.rideSimulation = null;
+    }
+
+    public void setRideSimulation(RideSimulation rideSimulation) {
+        this.rideSimulation = rideSimulation;
+    }
+
+    public RideSimulation getRideSimulation() {
+        return rideSimulation;
     }
 
     public String getRideId() {

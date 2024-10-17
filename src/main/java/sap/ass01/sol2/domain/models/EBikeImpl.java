@@ -74,4 +74,9 @@ public class EBikeImpl implements EBike {
         this.direction = direction;
     }
 
+    @Override
+    public void setEBikeId(String eBikeId) {
+        this.eBikeId = eBikeId;
+    }
+
 }

@@ -6,6 +6,8 @@ import sap.ass01.sol2.domain.utils.VelocityVector;
 public interface EBike {
     public String getEBikeId();
 
+    public void setEBikeId(String eBikeId);
+
     public boolean isAvailable();
 
     public void setAvailable(boolean available);
