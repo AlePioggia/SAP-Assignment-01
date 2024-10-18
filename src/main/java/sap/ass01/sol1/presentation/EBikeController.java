@@ -12,7 +12,7 @@ import sap.ass01.sol1.kernel.Kernel;
 import sap.ass01.sol1.service.plugins.EBikeServicePlugin;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/ebikes")
 public class EBikeController {
 
     private final Kernel kernel;
