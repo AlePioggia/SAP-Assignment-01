@@ -35,7 +35,8 @@ public class LayeredArchitectureTests {
         ArchRule rule = classes()
                 .that().resideInAPackage("..service..")
                 .should().onlyDependOnClassesThat()
-                .resideInAnyPackage("..service..", "..kernel..", "..persistence..", "java..");
+                .resideInAnyPackage("..service..", "..kernel..", "..persistence..",
+                        "java..");
 
         rule.check(importedClasses);
     }

@@ -1,20 +1,16 @@
 package sap.ass01.sol2.usecases;
 
 import sap.ass01.sol2.domain.models.User;
-import sap.ass01.sol2.domain.repositories.UserRepository;
+import sap.ass01.sol2.kernel.services.UserServicePlugin;
 
 public class GetUserUseCase {
-    private final UserRepository userRepository;
+    private final UserServicePlugin userServicePlugin;
 
-    public GetUserUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public GetUserUseCase(UserServicePlugin userServicePlugin) {
+        this.userServicePlugin = userServicePlugin;
     }
 
     public User execute(String userId) {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
-        }
-        return user;
+        return userServicePlugin.getUser(userId);
     }
 }

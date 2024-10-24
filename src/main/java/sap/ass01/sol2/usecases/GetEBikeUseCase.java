@@ -1,16 +1,16 @@
 package sap.ass01.sol2.usecases;
 
 import sap.ass01.sol2.domain.models.EBike;
-import sap.ass01.sol2.domain.repositories.EBikeRepository;
+import sap.ass01.sol2.kernel.services.EBikeServicePlugin;
 
 public class GetEBikeUseCase {
-    private final EBikeRepository eBikeRepository;
+    private final EBikeServicePlugin eBikeServicePlugin;
 
-    public GetEBikeUseCase(EBikeRepository eBikeRepository) {
-        this.eBikeRepository = eBikeRepository;
+    public GetEBikeUseCase(EBikeServicePlugin eBikeServicePlugin) {
+        this.eBikeServicePlugin = eBikeServicePlugin;
     }
 
     public EBike execute(String eBikeId) {
-        return eBikeRepository.findById(eBikeId);
+        return eBikeServicePlugin.getEBike(eBikeId);
     }
 }

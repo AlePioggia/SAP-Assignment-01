@@ -1,15 +1,15 @@
 package sap.ass01.sol2.usecases;
 
-import sap.ass01.sol2.domain.repositories.EBikeRepository;
+import sap.ass01.sol2.kernel.services.EBikeServicePlugin;
 
 public class RemoveEBikeUseCase {
-    private final EBikeRepository eBikeRepository;
+    private final EBikeServicePlugin eBikeServicePlugin;
 
-    public RemoveEBikeUseCase(EBikeRepository eBikeRepository) {
-        this.eBikeRepository = eBikeRepository;
+    public RemoveEBikeUseCase(EBikeServicePlugin eBikeServicePlugin) {
+        this.eBikeServicePlugin = eBikeServicePlugin;
     }
 
     public void execute(String eBikeId) {
-        eBikeRepository.delete(eBikeId);
+        this.eBikeServicePlugin.removeEBike(eBikeId);
     }
 }

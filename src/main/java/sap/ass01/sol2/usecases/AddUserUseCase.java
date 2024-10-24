@@ -1,23 +1,15 @@
 package sap.ass01.sol2.usecases;
 
-import sap.ass01.sol2.domain.models.User;
-import sap.ass01.sol2.domain.models.UserImpl;
-import sap.ass01.sol2.domain.models.UserImpl.Role;
-import sap.ass01.sol2.domain.repositories.UserRepository;
+import sap.ass01.sol2.kernel.services.UserServicePlugin;
 
 public class AddUserUseCase {
-    private final UserRepository userRepository;
+    private final UserServicePlugin userServicePlugin;
 
-    public AddUserUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AddUserUseCase(UserServicePlugin userServicePlugin) {
+        this.userServicePlugin = userServicePlugin;
     }
 
     public void execute(String userId, String userName) {
-        if (userRepository.findById(userId) != null) {
-            throw new IllegalArgumentException("User already exists");
-        }
-
-        User newUser = new UserImpl(userId, 0, Role.USER);
-        userRepository.save(newUser);
+        userServicePlugin.addUser(userId, userName);
     }
 }
